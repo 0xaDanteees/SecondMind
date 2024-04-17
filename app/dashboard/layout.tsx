@@ -27,7 +27,7 @@ const DashboardLayout = ({
 
     if (isLoading) {
         return (
-            <div className="h-full flex items-center justify-center">
+            <div className="h-screen flex flex-col items-center justify-center">
                 <Loader2 />
             </div>
         );

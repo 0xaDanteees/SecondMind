@@ -12,22 +12,21 @@ export const Logo = () => {
         <div className="hidden md:flex items-center gap-x-2">
             <Image
                 src="/brain.png"
-                height={50}
-                width={50}
+                height={40}
+                width={40}
                 alt="Logo_light"
                 className="light: block dark:hidden"
             />
             <Image
                 src="/brain.png"
-                height={50}
-                width={50}
+                height={40}
+                width={40}
                 alt="Logo_dark"
                 className="hidden dark:block"
             />
-            <p className={cn("font-semibold",
-            font.className)}>
+            <p className={cn("font-semibold", font.className)}>
                 Second <br/>
-                Mind
+                <span className="block text-center">Mind</span>
             </p>
         </div>
     );
