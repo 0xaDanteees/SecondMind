@@ -1,16 +1,22 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronFirst, MenuIcon } from "lucide-react"
+import { ChevronFirst, MenuIcon, StickyNote,FilePlus, Search } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import Profile from "./Profile";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Actions } from "./Actions";
+import { Notes } from "./Notes";
 
 export const Sidebar = () => {
 
     const pathname= usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
+
+    const create= useMutation(api.documents.create)
 
     const resizingRef= useRef(false);
     const sidebarRef= useRef<ElementRef<"aside">>(null);
@@ -89,6 +95,11 @@ export const Sidebar = () => {
             collapse();
         }
     }, [pathname, isMobile]);
+
+    const handleCreate= ()=>{
+        const promise = create({ title: "new Note"});
+    }
+
     return (
         <>
         <aside 
@@ -111,9 +122,11 @@ export const Sidebar = () => {
             </div>
             <div>
                 <Profile/>
+                <Actions onClick={()=>{}} label="Search" icon={Search} isSearch/> 
+                <Actions onClick={handleCreate} label="New page" icon={FilePlus}/>
             </div>
             <div className="mt-3">
-                <p>sticks</p>
+                <Notes/>
             </div>
             <div
                 onMouseDown={handleMouseDown}
