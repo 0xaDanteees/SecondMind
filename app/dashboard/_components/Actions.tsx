@@ -1,11 +1,12 @@
 "use client"
 
+import { DropdownMenu,DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { useMutation } from "convex/react";
-import { ChevronDown, ChevronRight, LucideIcon, PlusCircle } from "lucide-react";
+import { ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, PlusCircle, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface ActionsProps {
@@ -16,7 +17,7 @@ interface ActionsProps {
     active?: boolean;
     documentIcon?: string;
     isSearch?: boolean;
-    onClick: ()=>void;
+    onClick?: ()=>void;
     onExpand?: ()=>void;
     icon: LucideIcon;
 }
@@ -31,6 +32,9 @@ export const Actions=({
 
     const router= useRouter();
     const create= useMutation(api.documents.create);
+    const archive= useMutation(api.documents.archive);
+
+
     const handleExpand=(
         event: React.MouseEvent<HTMLDivElement, MouseEvent>
     )=>{
@@ -51,6 +55,14 @@ export const Actions=({
             //router.push(`/documents/${documentId}`);
         });
 
+    }
+
+    const onArchive=(
+        event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    )=>{
+        event.stopPropagation();
+        if (!id) return;
+        const promise = archive({id});
     }
 
     const ChevronIcon = expanded? ChevronDown : ChevronRight;
@@ -95,6 +107,36 @@ export const Actions=({
 
             {!!id && (
                 <div className="ml-auto flex items-center gap-x-2">
+                    
+                    <DropdownMenu>
+                        <DropdownMenuTrigger
+                            onClick={(e)=>e.stopPropagation()}
+                            asChild
+                        >
+                            <div
+                                role="button"
+                                className="h-full ml-auto rounded-sm opacity-0 group-hover:opacity-80 hover: bg-primary/20"
+                            >
+                                <MoreHorizontal className="h-4 w-4 text-muted-foreground"/>
+                            </div>  
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                            className="w-60"
+                            align="start"
+                            side="right"
+                            forceMount
+                        >
+                            <DropdownMenuItem onClick={onArchive} className="text-red-500">
+                                Delete
+                                <Trash2 className="h-4 w-4 ml-auto"/>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                            <div className="text-xs text-muted-foreground p-2">
+                                Last edited: 
+                            </div>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    
                     <div 
                         role="button"
                         onClick={onCreate}

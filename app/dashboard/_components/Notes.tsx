@@ -65,7 +65,7 @@ export const Notes=({
                     paddingLeft: level ? `${(level*12)+25}px`: undefined
                 }}
             >
-                No nested pages found
+                No pages found
             </p>
             {documents.map((document)=>(
                 <div>

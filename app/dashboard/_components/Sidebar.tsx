@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronFirst, MenuIcon, StickyNote,FilePlus, Search } from "lucide-react"
+import { ChevronFirst, MenuIcon, StickyNote,FilePlus, Search, PlusCircle, Trash2 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
@@ -10,6 +10,8 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Actions } from "./Actions";
 import { Notes } from "./Notes";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RecycleBin } from "./RecycleBin";
 
 export const Sidebar = () => {
 
@@ -127,6 +129,22 @@ export const Sidebar = () => {
             </div>
             <div className="mt-3">
                 <Notes/>
+                <Actions 
+                    onClick={handleCreate}
+                    icon={PlusCircle}
+                    label="Create Note"
+                />
+                <Popover>
+                    <PopoverTrigger className="w-full mt-3">
+                        <Actions label="Trash" icon={Trash2}/>
+                    </PopoverTrigger>
+                    <PopoverContent
+                        className="w-72 p-0"
+                        side={isMobile? "bottom": "right"}
+                    >
+                        <RecycleBin/>
+                    </PopoverContent>
+                </Popover>
             </div>
             <div
                 onMouseDown={handleMouseDown}
