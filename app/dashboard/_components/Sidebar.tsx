@@ -12,6 +12,7 @@ import { Actions } from "./Actions";
 import { Notes } from "./Notes";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { RecycleBin } from "./RecycleBin";
+import { useSearch } from "@/components/hooks/use-searchbar";
 
 export const Sidebar = () => {
 
@@ -102,6 +103,9 @@ export const Sidebar = () => {
         const promise = create({ title: "new Note"});
     }
 
+    const onSearch=useSearch();
+
+    
     return (
         <>
         <aside 
@@ -124,7 +128,7 @@ export const Sidebar = () => {
             </div>
             <div>
                 <Profile/>
-                <Actions onClick={()=>{}} label="Search" icon={Search} isSearch/> 
+                <Actions onClick={onSearch.onOpen} label="Search" icon={Search} isSearch/> 
                 <Actions onClick={handleCreate} label="New page" icon={FilePlus}/>
             </div>
             <div className="mt-3">
@@ -136,7 +140,7 @@ export const Sidebar = () => {
                 />
                 <Popover>
                     <PopoverTrigger className="w-full mt-3">
-                        <Actions label="Trash" icon={Trash2}/>
+                        <Actions label="Recyble Bin" icon={Trash2}/>
                     </PopoverTrigger>
                     <PopoverContent
                         className="w-72 p-0"

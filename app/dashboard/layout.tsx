@@ -6,6 +6,7 @@ import { useConvexAuth } from "convex/react";
 import { Loader2, ShieldX } from "lucide-react";
 import { useRouter } from 'next/navigation';
 import { Sidebar } from './_components/Sidebar';
+import { SearchModal } from '@/components/modals/SearchModal';
 
 const DashboardLayout = ({
     children
@@ -21,7 +22,7 @@ const DashboardLayout = ({
             setShowAlert(true);
             setTimeout(() => {
                 router.push("/");
-            }, 50000); 
+            }, 1000); 
         }
     }, [isAuthenticated, isLoading, router]);
 
@@ -53,6 +54,7 @@ const DashboardLayout = ({
         <div className="h-screen flex">
             <Sidebar/>
             <main className="flex-1 h-full overflow-y-auto">
+                <SearchModal/>
                 {children}
             </main>
         </div>

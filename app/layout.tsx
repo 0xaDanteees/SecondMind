@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ConvexClientProvider } from "@/components/providers/ConvexClientProvider";
 import { Navbar } from "@/components/common/Navbar";
+import { ModalProvider } from "@/components/providers/ModalProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
           >
               
               <div className="bg-gradient-to-r min-h-screen grainy from-[#000000] to-[#0B60B0]">
+                <ModalProvider/>
                 {children}
               </div>
           </ThemeProvider>

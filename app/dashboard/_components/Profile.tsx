@@ -2,17 +2,30 @@
 
 import {Avatar, AvatarImage } from "@/components/ui/avatar";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
-import { ChevronsLeftRight } from "lucide-react";
+import { 
+    DropdownMenu, DropdownMenuTrigger, 
+    DropdownMenuContent, DropdownMenuLabel,
+    DropdownMenuSeparator, DropdownMenuItem,
+    DropdownMenuShortcut } 
+from "@/components/ui/dropdown-menu";
+import { ChevronsLeftRight, Command, Settings2 } from "lucide-react";
 import Link from "next/link";
+import { useSettings } from "@/components/hooks/use-settings";
+import { Actions } from "./Actions";
+import { useShortcuts } from "@/components/hooks/use-shortcuts";
 
 const Profile= ()=>{
 
     const {user}=useUser();
+
+    const Settings=useSettings();
+    const Shortcuts= useShortcuts();
+
+
     return (
     <div className="flex">
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger >
         <div 
             role="button"
             className="flex items-center text-sm w-full hover:bg-primary/5 shadow-none "
@@ -21,7 +34,7 @@ const Profile= ()=>{
                 <Avatar className="h-6 w-6">
                     <AvatarImage src={user?.imageUrl}/>
                 </Avatar>
-                <span className="text-start font-medium line-clamp-1">
+                <span className="text-start font-medium line-clamp-1 text-white">
                     {user?.firstName}'s workspace
                 </span>
             </div>
@@ -43,22 +56,27 @@ const Profile= ()=>{
             </div>
             </DropdownMenuItem>
             <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+               <Actions 
+                onClick={Settings.onOpen}
+                label="Settings"
+                icon={Settings2}
+               />
+            <DropdownMenuShortcut className="text-xs"><span className="text-[0.7rem]">CTRL</span>S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Keyboard shortcuts
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+            <Actions 
+                onClick={Shortcuts.onOpen}
+                label="Shortcuts"
+                icon={Command}
+               />
+            <DropdownMenuShortcut className="text-xs"><span className="text-[0.7rem]">CTRL</span>H</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <Link href="/">
-          <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground text-red-600 hover:bg-primary/5">
-            
-            <SignOutButton>
+            <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground text-red-600 hover:bg-primary/5">
+            <SignOutButton asChild afterSignOut>
                 Log Out
             </SignOutButton>
-            
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
           </Link>
       </DropdownMenuContent>
