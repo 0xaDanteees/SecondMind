@@ -25,8 +25,14 @@ export const ThumbnailModal= ()=>{
             setIsSubmitting(true);
             setFile(file);
 
-            const response= await edgestore.publicFiles.upload({file});
-
+            
+            const response= await edgestore.publicFiles.upload({
+                    file,
+                    options: {
+                        replaceTargetUrl: thumbnail.url,
+                    }
+                });
+                
             await update({
                 id: params.documentId as Id<"documents">,
                 thumbnail: response.url

@@ -9,6 +9,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
+import { useEdgeStore } from "@/lib/edgestore";
 
 interface ThumbnailProps {
     url?: string;
@@ -21,7 +22,13 @@ export const Thumbnail = ({url, preview}: ThumbnailProps)=>{
     const removeThumbnail= useMutation(api.documents.removeThumbnail);
     const params= useParams();
 
-    const onRemove=()=>{
+    const {edgestore}=useEdgeStore();
+
+    const onRemove= async ()=>{
+        if(url){
+            await edgestore.publicFiles.delete({url: url})
+        }
+        
         removeThumbnail({
             id: params.documentId as Id<"documents">
         });
@@ -44,7 +51,7 @@ export const Thumbnail = ({url, preview}: ThumbnailProps)=>{
             {url && !preview &&(
                 <div className="items-center absolute gap-x-2 flex right-5 bottom-5 group-hover:opacity-100 opacity-0">
                     <Button
-                        onClick={asThumbnail.onOpen}
+                        onClick={()=>asThumbnail.onReplace(url)}
                         variant="outline"
                         size="sm"
                         className="text-xs text-muted-foreground"
