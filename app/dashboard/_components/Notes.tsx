@@ -37,7 +37,7 @@ export const Notes=({
     });
 
     const onRedirect= (documentId: string)=>{
-        router.push(`/documents/${documentId}`);
+        router.push(`/dashboard/documents/${documentId}`);
     }
 
     if (documents===undefined){

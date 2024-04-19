@@ -52,7 +52,7 @@ export const Actions=({
             if(!expanded){
                 onExpand?.();
             }
-            //router.push(`/documents/${documentId}`);
+            router.push(`/dashboard/documents/${documentId}`);
         });
 
     }

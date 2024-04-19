@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ChevronFirst, MenuIcon, StickyNote,FilePlus, Search, PlusCircle, Trash2 } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import Profile from "./Profile";
@@ -13,9 +13,11 @@ import { Notes } from "./Notes";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { RecycleBin } from "./RecycleBin";
 import { useSearch } from "@/components/hooks/use-searchbar";
+import { Navbar } from "./Navbar";
 
 export const Sidebar = () => {
 
+    const params=useParams();
     const pathname= usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -166,10 +168,17 @@ export const Sidebar = () => {
                 reset && "transition-all ease-in-out duration-300",
                 isMobile && "left-0 w-full"
             )}>
-
-                <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsed && <MenuIcon className="h-6 w-6 text-muted-foreground hover:bg-neutral-300" onClick={resetSidebarSize}/>}
-                </nav>
+                {!!params.documentId ? (
+                    <Navbar
+                        isCollapsed={isCollapsed}
+                        onResetWidth={resetSidebarSize}
+                    />
+                ): (
+                    <nav className="bg-transparent px-3 py-2 w-full">
+                        {isCollapsed && <MenuIcon className="h-6 w-6 text-muted-foreground hover:bg-neutral-300" onClick={resetSidebarSize}/>}
+                    </nav>
+                )}
+                
         </div>
         </>
     )

@@ -23,7 +23,7 @@ export const RecycleBin=()=>{
     })
 
     const onClick= (documentId: string)=>{
-        router.push(`/documents/${documentId}`);
+        router.push(`/dashboard/documents/${documentId}`);
     };
 
     const onRestore= (
