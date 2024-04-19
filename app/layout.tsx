@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { ConvexClientProvider } from "@/components/providers/ConvexClientProvider";
 import { Navbar } from "@/components/common/Navbar";
 import { ModalProvider } from "@/components/providers/ModalProvider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ConvexClientProvider>
+          <EdgeStoreProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -33,6 +35,7 @@ export default function RootLayout({
                 {children}
               </div>
           </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>

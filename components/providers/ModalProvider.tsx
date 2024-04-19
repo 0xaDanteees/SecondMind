@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { SettingsModal } from "../modals/SettingsModal"
 import { ShortcutsModal } from "../modals/ShortcutsModal"
+import { ThumbnailModal } from "../modals/ThumbnailModal"
 
 export const ModalProvider=()=>{
 
@@ -20,6 +21,7 @@ export const ModalProvider=()=>{
         <>
             <SettingsModal/>
             <ShortcutsModal/>
+            <ThumbnailModal/>
         </>
     )
 }

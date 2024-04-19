@@ -8,6 +8,7 @@ import React, { ElementRef, useRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import TextareaAutosize from "react-textarea-autosize";
+import { useThumbnail } from "@/components/hooks/use-thumbnail";
 
 interface ToolbarProps{
     initialData: Doc<"documents">;
@@ -22,6 +23,8 @@ export const Toolbar= ({initialData, preview}: ToolbarProps)=>{
 
     const mutable = useMutation(api.documents.updateNotes);
     const removeEmoji = useMutation(api.documents.removeIcon);
+
+    const asThumbnail= useThumbnail();
 
     const enableInput=()=>{
         if (preview) return;
@@ -110,7 +113,7 @@ export const Toolbar= ({initialData, preview}: ToolbarProps)=>{
                         className="text-muted-foreground text-xs"
                         variant="outline"
                         size="sm"
-                        onClick={()=>{}}
+                        onClick={asThumbnail.onOpen}
                     >
                         Thumbnail
                         <ImagePlus className="h-4 w-4 ml-2"/>
