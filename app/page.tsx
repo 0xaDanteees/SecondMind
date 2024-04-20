@@ -16,7 +16,7 @@ export default function Home() {
     <Navbar/>
     <div className=" grid grid-cols-2 gap-8 p-8 mt-10">
       <div className="col-span-1 flex flex-col justify-center">
-        <h1 className="text-[#256C5D] font-semibold text-7xl text-center">
+        <h1 className="text-[#256C5D] dark:text-white font-semibold text-7xl text-center">
           Discover SecondMind
           <span className="font-bold text-[#3F2305] dark:text-[#F0EDCF]">
             <Typewriter
@@ -37,7 +37,7 @@ export default function Home() {
 
           <div className="flex justify-center">
             <Link href="/dashboard">
-              <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-[#ffffff]">
+              <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-[#ffffff] dark:text-black">
                 Go dashboard
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={3} />
               </Button>
@@ -56,7 +56,7 @@ export default function Home() {
         {!isAuthenticated && !isLoading && (
           <div className="flex justify-center">
               <SignInButton mode="modal">
-                <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-white">
+                <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-white dark:text-black">
                 Try secondMind
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={3} />
               </Button>

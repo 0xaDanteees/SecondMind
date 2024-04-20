@@ -8,11 +8,12 @@ import {
     DropdownMenuSeparator, DropdownMenuItem,
     DropdownMenuShortcut } 
 from "@/components/ui/dropdown-menu";
-import { ChevronsLeftRight, Command, Settings2 } from "lucide-react";
+import { ChevronsLeftRight, Command, Home, Settings2 } from "lucide-react";
 import Link from "next/link";
 import { useSettings } from "@/components/hooks/use-settings";
 import { Actions } from "./Actions";
 import { useShortcuts } from "@/components/hooks/use-shortcuts";
+import { Button } from "@/components/ui/button";
 
 const Profile= ()=>{
 
@@ -24,13 +25,21 @@ const Profile= ()=>{
 
     return (
     <div className="flex">
+        <div className="pt-1">
+            <Link href="/">
+            <Button variant="ghost" size="sm">
+                <Home className=" w-5 h-5 mt-2 mb-2"/>
+            </Button>
+            </Link>
+        </div>
     <DropdownMenu>
       <DropdownMenuTrigger >
         <div 
             role="button"
-            className="flex items-center text-sm w-full hover:bg-primary/5 shadow-none "
+            className="flex w-full items-center text-sm hover:bg-primary/5 shadow-none "
         >
-            <div className="gap-x-2 mr-3 flex items-center p-3 max-w-[150px]">
+            <ChevronsLeftRight className="rotate-90 mr-1 text-muted-foreground h-6 w-6 hover:bg-primary/20 hover:rounded-sm"/>
+            <div className="gap-x-2 mr-2 flex items-center p-3 max-w-[150px]">
                 <Avatar className="h-6 w-6">
                     <AvatarImage src={user?.imageUrl}/>
                 </Avatar>
@@ -38,7 +47,7 @@ const Profile= ()=>{
                     {user?.firstName}'s workspace
                 </span>
             </div>
-            <ChevronsLeftRight className="rotate-90 mr-auto text-muted-foreground h-6 w-6"/>
+            
         </div>
       </DropdownMenuTrigger>
       
@@ -73,8 +82,8 @@ const Profile= ()=>{
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <Link href="/">
-            <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground text-red-600 hover:bg-primary/5">
-            <SignOutButton asChild afterSignOut>
+            <DropdownMenuItem asChild className="w-full cursor-pointer text-muted-foreground text-red-600 hover:bg-primary/5">
+            <SignOutButton>
                 Log Out
             </SignOutButton>
           </DropdownMenuItem>
