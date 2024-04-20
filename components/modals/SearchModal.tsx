@@ -36,8 +36,8 @@ export const SearchModal=()=>{
         return()=>document.removeEventListener("keydown", down);
     }, [toggle]);
 
-    const onSelect = (id: string)=>{
-        router.push(`/documents/${id}`);
+    const onSelect = (documentId: string)=>{
+        router.push(`/dashboard/documents/${documentId}`);
         onClose();
     };
 
@@ -48,7 +48,7 @@ export const SearchModal=()=>{
     return(
 
         <CommandDialog open={isOpen} onOpenChange={onClose}>
-            <CommandInput placeholder="Search for a Note"/>
+            <CommandInput placeholder={`Hi ${user?.firstName} navegate using your keyboard`}/>
             <CommandList>
                 <CommandEmpty>No Notes found</CommandEmpty>
                 <CommandGroup heading="Notes">
@@ -57,7 +57,7 @@ export const SearchModal=()=>{
                             key={note._id}
                             value={`${note._id}-${note.title}`}
                             title={note.title}
-                            onSelect={onSelect}
+                            onSelect={()=>onSelect(note._id)}
                         >
                             {note.icon? (
                                 <p className="ml-2 text-[18px]">{note.icon}</p>
