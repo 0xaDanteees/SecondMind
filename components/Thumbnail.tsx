@@ -10,6 +10,7 @@ import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
+import { Skeleton } from "./ui/skeleton";
 
 interface ThumbnailProps {
     url?: string;
@@ -71,5 +72,11 @@ export const Thumbnail = ({url, preview}: ThumbnailProps)=>{
                 </div>
             )}
         </div>
+    )
+}
+
+Thumbnail.Skeleton = function ThumbnailSkeleton(){
+    return(
+        <Skeleton className="w-full h-[12hv"/>
     )
 }

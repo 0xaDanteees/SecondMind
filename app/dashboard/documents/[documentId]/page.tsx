@@ -5,6 +5,8 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { Toolbar } from "../../_components/Toolbar";
 import { Thumbnail } from "@/components/Thumbnail";
+import { Skeleton } from "@/components/ui/skeleton";
+import Editor from "@/components/Editor";
 
 
 interface NotePage {
@@ -22,8 +24,13 @@ const NotePage=({params}: NotePage)=>{
     if(document===undefined){
         return(
             <div>
-            Loading...
-        </div>
+            <Thumbnail.Skeleton/>
+            <div className="mx-auto mt-10 md:max-3xl lg:max-w-4xl">
+                <div className="pt-4 pl-8 space-y-4">
+                    <Skeleton className="h-16 w-[50%]"/>
+                </div>
+            </div>
+            </div>
         )
     }
 
@@ -36,6 +43,10 @@ const NotePage=({params}: NotePage)=>{
             <div className="h-[9vh]"/>
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
                 <Toolbar initialData= {document}/>
+                <Editor
+                    onChange={()=>{}}
+                    initialContent={document.content}
+                />
             </div>
         </div>   
     )

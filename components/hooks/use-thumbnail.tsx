@@ -10,8 +10,8 @@ type ThumbnailStore={
 
 export const useThumbnail = create<ThumbnailStore>((set)=>({
     isOpen: false,
-    onOpen: ()=>set({isOpen:true}),
-    onClose: ()=>set({isOpen: false}),
+    onOpen: ()=>set({isOpen:true, url:undefined}),
+    onClose: ()=>set({isOpen: false, url:undefined}),
     url: undefined,
     onReplace: (url: string)=>set({isOpen: true, url})
 }))
