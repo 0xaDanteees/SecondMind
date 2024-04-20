@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ChevronFirst, MenuIcon, StickyNote,FilePlus, Search, PlusCircle, Trash2 } from "lucide-react"
-import { useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import Profile from "./Profile";
@@ -19,6 +19,7 @@ export const Sidebar = () => {
 
     const params=useParams();
     const pathname= usePathname();
+    const router= useRouter();
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     const create= useMutation(api.documents.create)
@@ -102,7 +103,8 @@ export const Sidebar = () => {
     }, [pathname, isMobile]);
 
     const handleCreate= ()=>{
-        const promise = create({ title: "new Note"});
+        const promise = create({ title: "new Note"})
+        .then((documentId)=>router.push(`/dashboard/documents/${documentId}`));
     }
 
     const onSearch=useSearch();

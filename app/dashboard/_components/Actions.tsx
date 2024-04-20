@@ -62,7 +62,8 @@ export const Actions=({
     )=>{
         event.stopPropagation();
         if (!id) return;
-        const promise = archive({id});
+        const promise = archive({id})
+        .then(()=>router.push("/dashboard/"))
     }
 
     const ChevronIcon = expanded? ChevronDown : ChevronRight;
@@ -92,7 +93,7 @@ export const Actions=({
                     {documentIcon}
                 </div>
             ): (
-                <Icon className="shrink-0 h-[18px] mr-2 text-muted-foreground"/>
+                <Icon className="shrink-0 h-[18px] w-[18px] mr-2 text-muted-foreground"/>
             )}
             
             <span className="truncate">

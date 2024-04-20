@@ -77,6 +77,6 @@ export const Thumbnail = ({url, preview}: ThumbnailProps)=>{
 
 Thumbnail.Skeleton = function ThumbnailSkeleton(){
     return(
-        <Skeleton className="w-full h-[12hv"/>
+        <Skeleton className="w-full h-[12hv]"/>
     )
 }
