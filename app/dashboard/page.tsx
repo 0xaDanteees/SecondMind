@@ -21,7 +21,7 @@ const Dashboard =() => {
     
     return (
     <div className='h-full flex flex-col items-center justify-center'>  
-      <h1 className='text-5xl font-extrabold text-justify text-[#F0EDCF]'>
+      <h1 className='text-5xl font-extrabold text-justify text-[#3F2305] dark:text-[#F0EDCF]'>
         Hi there {user?.firstName}!
       </h1>
       <div className='mt-6'></div>
@@ -32,7 +32,7 @@ const Dashboard =() => {
         alt="Empty workspace"
 
       />
-      <Button  onClick={onCreate} className='mt-3 bg-[#F0EDCF] text-lg flex items-center'>
+      <Button  onClick={onCreate} className='mt-3 text-white bg-[#3F2305] dark:bg-[#F0EDCF] text-lg flex items-center'>
         select or create a new workspace
         <PlusCircleIcon className='h-5 w-5 ml-2 justify-center'/>
       </Button>

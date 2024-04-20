@@ -29,8 +29,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-              
-              <div className="bg-gradient-to-r min-h-screen grainy from-[#000000] to-[#0B60B0]">
+              <div>
                 <ModalProvider/>
                 {children}
               </div>

@@ -24,7 +24,7 @@ export const Logo = () => {
                 alt="Logo_dark"
                 className="hidden dark:block"
             />
-            <p className={cn("font-semibold", font.className)}>
+            <p className={cn("font-extrabold text-[#256C5D]", font.className)}>
                 Second <br/>
                 <span className="block text-center">Mind</span>
             </p>

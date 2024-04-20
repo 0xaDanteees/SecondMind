@@ -22,7 +22,7 @@ export const Publish=({initialData}: PublishProps)=>{
     const [isCopied, setIsCopied]=useState(false);
     const [isSubmitting, setIsSubmitting]= useState(false);
 
-    const url= `${origin}/preview/${initialData._id}`;
+    const url= `${origin}/published/${initialData._id}`;
 
     const onPublic=()=>{
         setIsSubmitting(true);

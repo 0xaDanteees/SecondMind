@@ -12,13 +12,13 @@ export default function Home() {
 
   const {isAuthenticated, isLoading}= useConvexAuth();
   return (
-    <div >
+    <div className="min-h-screen grainy dark:bg-gradient-to-r dark:from-[#000000] dark:to-[#19436b] bg-gradient-to-r from-[#F5F5F5] to-[#F2EAD3]">
     <Navbar/>
     <div className=" grid grid-cols-2 gap-8 p-8 mt-10">
       <div className="col-span-1 flex flex-col justify-center">
-        <h1 className="font-semibold text-7xl text-center">
+        <h1 className="text-[#256C5D] font-semibold text-7xl text-center">
           Discover SecondMind
-          <span className="font-bold text-[#F0EDCF]">
+          <span className="font-bold text-[#3F2305] dark:text-[#F0EDCF]">
             <Typewriter
               options={{
                 strings: ['create...', 'journal...', 'share...','live...'],
@@ -29,7 +29,7 @@ export default function Home() {
           </span>{" "}
         </h1> 
         <div className="mt-6"></div>
-        <h2 className="font-semibold text-3xl text-center text-[#40A2D8]"> 
+        <h2 className="font-semibold text-3xl text-center text-[#0F1230] dark:text-[#40A2D8]"> 
           Exploit your full potential with AI by your side
         </h2>
         <div className="mt-8"></div>
@@ -37,7 +37,7 @@ export default function Home() {
 
           <div className="flex justify-center">
             <Link href="/dashboard">
-              <Button className="bg-[#F0EDCF] font-bold">
+              <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-[#ffffff]">
                 Go dashboard
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={3} />
               </Button>
@@ -47,7 +47,7 @@ export default function Home() {
 
         {isLoading && (
           <div className="flex justify-center">
-            <Button className="bg-[#F0EDCF] font-bold">
+            <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold">
               <Loader2/>
             </Button>
         </div>
@@ -56,7 +56,7 @@ export default function Home() {
         {!isAuthenticated && !isLoading && (
           <div className="flex justify-center">
               <SignInButton mode="modal">
-                <Button className="bg-[#F0EDCF] font-bold">
+                <Button className="bg-[#0F1230] dark:bg-[#F0EDCF] font-bold text-white">
                 Try secondMind
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={3} />
               </Button>
