@@ -24,7 +24,7 @@ const NotePage=({params}: NotePage)=>{
     
     const update = useMutation(api.documents.updateNotes);
 
-    const onChange = (content) => {
+    const onChange = (content: any) => {
         update({
         id: params.documentId,
         content,

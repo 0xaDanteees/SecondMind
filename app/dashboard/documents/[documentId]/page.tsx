@@ -23,7 +23,12 @@ const NotePage=({params}: NotePage)=>{
     
     const update = useMutation(api.documents.updateNotes);
 
-    
+    const onChange = (content: any) => {
+        update({
+        id: params.documentId,
+        content,
+        });
+    };
 
     if(document===undefined){
         return(
@@ -47,7 +52,7 @@ const NotePage=({params}: NotePage)=>{
             <div className="h-[9vh]"/>
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
                 <Toolbar initialData= {document}/>
-                <Editor onChange={()=>{}} initialContent={document.content} />
+                <Editor onChange={onChange} initialContent={document.content} />
             </div>
         </div>   
     )
