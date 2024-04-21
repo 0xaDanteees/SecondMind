@@ -67,23 +67,23 @@ export const Notes=({
             >
                 No pages found
             </p>
-            {documents.map((document)=>(
-                <div>
+            {documents.map((note)=>(
+                <div key={note._id}>
                     <Actions
-                        id={document._id}
-                        onClick={()=>onRedirect(document._id)}
-                        label={document.title}
+                        id={note._id}
+                        onClick={()=>onRedirect(note._id)}
+                        label={note.title}
                         icon={StickyNoteIcon}
-                        documentIcon={document.icon}
-                        active={params.documentId===document._id}
+                        documentIcon={note.icon}
+                        active={params.documentId===note._id}
                         level={level}
-                        onExpand={()=>onExpand(document._id)}
-                        expanded={expanded[document._id]}
+                        onExpand={()=>onExpand(note._id)}
+                        expanded={expanded[note._id]}
                     />
 
-                    {expanded[document._id] && (
+                    {expanded[note._id] && (
                         <Notes
-                            parentDocumentId={document._id}
+                            parentDocumentId={note._id}
                             level={level+1}
                         />
                     )}
