@@ -73,12 +73,15 @@ export const ThumbnailModal = () => {
       console.log("imageResponse", imageResponse);
       const imageUrl = imageResponse.data[0].url;
       console.log(imageUrl);
+      onChange(imageUrl)
+      
     } catch (error) {
       throw error;
     } finally {
       setIsSubmitting(false);
     }
   };
+  
 
   const onChange = async (file?: File) => {
     if (file) {
@@ -131,6 +134,7 @@ export const ThumbnailModal = () => {
                       <Input 
                         type="text" 
                         placeholder="Enter your prompt here" {...field}
+                        disabled={isSubmitting}
                         />
                       <FormMessage />
                     </FormItem>
