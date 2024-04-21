@@ -19,6 +19,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["./**/*"],
+  "include": ["./**/*", "../lib/openai.ts"],
   "exclude": ["./_generated"]
 }
