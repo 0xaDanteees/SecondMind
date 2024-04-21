@@ -46,9 +46,10 @@ export const SearchModal=()=>{
     }
 
     return(
+        //some z-index issue that I can¿t find yet but i will...
 
         <CommandDialog open={isOpen} onOpenChange={onClose}>
-            <CommandInput placeholder={`Hi ${user?.firstName} navegate using your keyboard`}/>
+            <CommandInput placeholder={`Hi ${user?.firstName}, navegate through keyboard arrows`}/> 
             <CommandList>
                 <CommandEmpty>No Notes found</CommandEmpty>
                 <CommandGroup heading="Notes">

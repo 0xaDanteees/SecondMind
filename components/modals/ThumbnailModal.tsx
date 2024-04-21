@@ -32,10 +32,8 @@ export const ThumbnailModal = () => {
   const { edgestore } = useEdgeStore();
   const [file, setFile] = useState<File | undefined>();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
- 
   const update = useMutation(api.documents.updateNotes);
   const params = useParams();
-
   const form = useForm<InputType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -45,46 +43,28 @@ export const ThumbnailModal = () => {
 
   const onSubmit: SubmitHandler<InputType> = async (data) => {
     setIsSubmitting(true);
-
     try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: `${data.prompt}. Using the prompt given, generate a thumbnail description for it.summarize using a single descriptive sentence.`,
-          },
-        ],
-      });
-      const responseMessage = response.choices[0].message.content ?? "";
-      const imageFetchResponse = await fetch(`https://api.openai.com/v1/images/generations`, {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: responseMessage + " illustration, anime, photographic, realistic",
-          n: 1,
-          size: "256x256",
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
-        },
-      });
-      const imageResponse = await imageFetchResponse.json();
-      console.log("imageResponse", imageResponse);
-      const imageUrl = imageResponse.data[0].url;
-      console.log(imageUrl);
-      onChange(imageUrl)
-      
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-  
+        const response = await openai.images.generate({
+            model: "dall-e-3",
+            prompt: `${data.prompt}`,
+            n: 1,
+            response_format: "b64_json",
+            size: "1024x1024",
+        });
 
+        const blob = await (await fetch(`data:image/jpeg;base64,${response.data[0].b64_json}`)).blob();
+        const file = new File([blob], 'thumbnail.png', { type: 'image/png' });
+        onChange(file);
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        setIsSubmitting(false);
+    }
+};
+  
   const onChange = async (file?: File) => {
     if (file) {
+        console.log(file)
       setIsSubmitting(true);
       setFile(file);
 
@@ -102,7 +82,6 @@ export const ThumbnailModal = () => {
       onClose();
     }
   };
-
   const onClose = () => {
     setFile(undefined);
     setIsSubmitting(false);
@@ -134,7 +113,6 @@ export const ThumbnailModal = () => {
                       <Input 
                         type="text" 
                         placeholder="Enter your prompt here" {...field}
-                        disabled={isSubmitting}
                         />
                       <FormMessage />
                     </FormItem>
