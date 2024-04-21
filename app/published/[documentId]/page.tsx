@@ -7,6 +7,7 @@ import { Thumbnail } from "@/components/Thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
 import Editor from "@/components/Editor";
 import { Toolbar } from "@/app/dashboard/_components/Toolbar";
+import { Navbar } from "@/components/common/Navbar";
 
 
 interface NotePage {
@@ -32,6 +33,7 @@ const NotePage=({params}: NotePage)=>{
 
     if(document===undefined){
         return(
+            
             <div>
             <Thumbnail.Skeleton/>
             <div className="mx-auto mt-10 md:max-3xl lg:max-w-4xl">
@@ -48,11 +50,14 @@ const NotePage=({params}: NotePage)=>{
     }
     return (
         <div className="pb-40 dark:bg-[#1F1F1F]">
-            <Thumbnail url={document.thumbnail}/>
+            <Navbar/>
+            <div className="py-15">
+                <Thumbnail preview url={document.thumbnail}/>
             <div className="h-[9vh]"/>
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
                 <Toolbar preview initialData= {document}/>
                 <Editor editable={false} onChange={onChange} initialContent={document.content} />
+            </div>
             </div>
         </div>   
     )
